@@ -1,0 +1,12 @@
+Verticle, horizontal: heighest > lowest
+
+Day 1: 261,789,590,348,154 (all horizontal) 10cm spacings
+
+Day2: 154,590, 348,789 (2 verticle)
+	154,261,348,789,590 (all horizontal) 45cm spacings
+
+day 3: 590, 154, 789, 248, 261
+day 4: 348, 590, 789, 261, 154
+ravenscourt park: 150, 154, 348, 789, 261, 590 (1 verticle)
+roof: 348, 150, 261, 789, 590, 154 (1 verticle)
+ice: 348, 789, 150, 261, 154, 590 (3 verticle)

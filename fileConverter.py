@@ -7,8 +7,17 @@ Created on Thu Dec  1 19:43:02 2022
 import numpy as np
 import os
 
-permutation = [0,1,2,3,4,5] #ORDER = VERTICLE DETECTORS THEN HIGHEST TO LOWEST
-file = 'Calibration1'
+order = [1,2,3,4,5,6] #VERTICLE DETECTORS THEN HIGHEST TO LOWEST
+permutation = [5,0,4,1,3,2] #ORDER = VERTICLE DETECTORS THEN HIGHEST TO LOWEST
+file = 'Ice2'
+
+
+Calibration = {348:1,
+               789:2,
+               150:3,
+               261:4,
+               154:5,
+               590:6}
 
 
 
@@ -53,6 +62,6 @@ data[:, idx]  # return a rearranged copy
 data[:] = data[:, idx]  # in-place modification of a
 
 np.savetxt(file+'Temps.csv', data, delimiter=',')
+
+
 os.remove(file+'fixed.csv')
-
-
