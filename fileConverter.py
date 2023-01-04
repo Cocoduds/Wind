@@ -8,17 +8,21 @@ import numpy as np
 import os
 
 order = [1,2,3,4,5,6] #VERTICLE DETECTORS THEN HIGHEST TO LOWEST
-permutation = [5,0,4,1,3,2] #ORDER = VERTICLE DETECTORS THEN HIGHEST TO LOWEST
-file = 'Ice2'
+permutation = [1,4,3,5,0,2] #ORDER = VERTICLE DETECTORS THEN HIGHEST TO LOWEST
+file = 'Ravenscourt3'
+
+Calibration = {
+    154 : 0.8447024013209711,
+    590 : 0.8789918044369084,
+    150 : 1.0803072140599494,
+    789 : 1.059367134308126,
+    261 : 0.9092088339325909,
+    348 : 1.410428641068372
+    }
 
 
-Calibration = {348:1,
-               789:2,
-               150:3,
-               261:4,
-               154:5,
-               590:6}
 
+calibration = [Calibration[590],Calibration[261],Calibration[789],Calibration[348],Calibration[154],Calibration[150]]
 
 
 
@@ -34,22 +38,26 @@ f.close()
 
 
 
-data=np.loadtxt(file+'fixed.csv', delimiter = ',', encoding='utf-8-sig', skiprows= 1, max_rows = 34, usecols = range(1,13))
+data=np.loadtxt(file+'fixed.csv', delimiter = ',', encoding='utf-8-sig', skiprows= 1, usecols = range(1,13))
 data = np.delete(data,0,1)
 data = np.delete(data,1,1)
 data = np.delete(data,2,1)
 data = np.delete(data,3,1)
 data = np.delete(data,4,1)
 data = np.delete(data,5,1)
-idx = np.empty_like(permutation)
-idx[permutation] = np.arange(len(permutation))
-data[:, idx]  # return a rearranged copy
-data[:] = data[:, idx]  # in-place modification of a
+data = data[:, permutation]
+for i in range(len(data[1,:])):
+    for j in range(len(data[:,i])):
+        data[j,i] = data[j,i] * calibration[i] 
+# idx = np.empty_like(permutation)
+# idx[permutation] = np.arange(len(permutation))
+# data[:, idx]  # return a rearranged copy
+# data[:] = data[:, idx]  # in-place modification of a
 
 np.savetxt(file+'Data.csv', data, delimiter=',')
 
 
-data=np.loadtxt(file+'fixed.csv', delimiter = ',', encoding='utf-8-sig', skiprows= 1, max_rows = 34, usecols = range(1,13))
+data=np.loadtxt(file+'fixed.csv', delimiter = ',', encoding='utf-8-sig', skiprows= 1, usecols = range(1,13))
 data = np.delete(data,1,1)
 data = np.delete(data,2,1)
 data = np.delete(data,3,1)
@@ -64,4 +72,4 @@ data[:] = data[:, idx]  # in-place modification of a
 np.savetxt(file+'Temps.csv', data, delimiter=',')
 
 
-os.remove(file+'fixed.csv')
+# os.remove(file+'fixed.csv')

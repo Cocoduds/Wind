@@ -26,17 +26,18 @@ def data_fix(Data):
     return fixed_data
 
 
-Datapoints = 5
-heights = np.array([1,2,3,4,5])*0.45
+Datapoints = 3
+heights = np.array([1,3,5])*0.45 #for ice
+
 #%%
 #Loading data and isnerting numpy nans
-data=np.loadtxt("Ravenscourt3Data.csv", delimiter = ',', encoding='utf-8-sig')
+data=np.loadtxt("Ice2Data.csv", delimiter = ',', encoding='utf-8-sig')
 for i in range(len(data[0,:])):
     for j in range(len(data[:,i])):
         if data[j][i] < 0:
             data[j][i] = np.nan
 
-temps=np.loadtxt("Ravenscourt3Temps.csv", delimiter = ',', encoding='utf-8-sig')
+temps=np.loadtxt("Ice2Temps.csv", delimiter = ',', encoding='utf-8-sig')
 for i in range(len(data[0,:])):
     for j in range(len(temps[:,i])):
         if temps[j][i] < 0:
@@ -51,13 +52,14 @@ time = np.linspace(0,len(data[:,0]), num=len(data[:,0]))
 averages=[]
 stds=[]           
 for i in range(0,Datapoints):
+    print(np.nanmean(data[:,i]))
     averages.append(np.nanmean(data[:,i]))
     stds.append(np.nanstd(data[:,i]))
     plt.figure(1)
     plt.plot(time, data[:,i])
 plt.figure(2)
 plt.errorbar(heights,averages,yerr=stds, ls='none', fmt='.')
-
+# plt.ylim(0.4,0.6)
 
 
 #%%
@@ -180,7 +182,7 @@ print(p2)
 
 y= (9.81/np.mean(averagetemps))*(p2[1])
 u=(p1[1]**2)
-print(y/u)
+print('Richardon is ', y/u)
 
 #%% finding eddie size
 def area_t(a,b,dx):

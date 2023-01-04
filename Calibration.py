@@ -20,13 +20,13 @@ plt.close('all')
 Datapoints = 6
 #%%
 #Loading data and inserting numpy nans
-data=np.loadtxt("CalibrationData2.csv", delimiter = ',', encoding='utf-8-sig')
+data=np.loadtxt("Calibration1Data.csv", delimiter = ',', encoding='utf-8-sig')
 for i in range(len(data[0,:])):
     for j in range(len(data[:,i])):
         if data[j][i] == -1:
             data[j][i] = np.nan
 
-temps=np.loadtxt("CalibrationData2Temps.csv", delimiter = ',', encoding='utf-8-sig')
+temps=np.loadtxt("Calibration1Temps.csv", delimiter = ',', encoding='utf-8-sig')
 for i in range(len(data[0,:])):
     for j in range(len(temps[:,i])):
         if temps[j][i] == -1:
