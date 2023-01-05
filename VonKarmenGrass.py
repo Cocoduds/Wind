@@ -79,15 +79,15 @@ plt.plot(time,wprimelow)
 plt.plot(time,wprimehigh)
 ustarslow = []
 for j in range(len(data[:,0])):
-    ustarslow.append(np.sqrt(uprimelow[j]*wprimelow[j]))
+    ustarslow.append(np.sqrt(np.abs(uprimelow[j]*wprimelow[j])))
 ustarshigh = []
 for j in range(len(data[:,0])):
-    ustarshigh.append(np.sqrt(uprimehigh[j]*wprimehigh[j]))
+    ustarshigh.append(np.sqrt(np.abs(uprimehigh[j]*wprimehigh[j])))
 ustarlow = np.nanmean(ustarslow)
 ustarhigh = np.nanmean(ustarshigh)
 
-print(ustarlow)
-print(ustarhigh)
+print('ustar from low = ',ustarlow)
+print('ustar from high = ',ustarhigh)
 
 
 #%%
@@ -98,19 +98,21 @@ stds=[]
 for i in range(0,2):
     averages.append(np.nanmean(data[:,i]))
     stds.append(np.nanstd(data[:,i]))
-print(averages)
 slope = (averages[1]-averages[0])/(heights[1]-heights[0])
-print(slope)
 yint = averages[0]-slope*heights[0]
 print("The value of z_0 is =", np.exp(-yint/slope))
 
 
 k = ustarlow*np.log(0.46/0.1)/np.mean(averages)
-print(k)
+print('vonkarmen = ', k)
 k = ustarhigh*np.log(1.95/0.1)/np.mean(averages)
-print(k)
+print('vonkarmen at high = ', k)
 
-# #%%
+
+
+
+
+#%%
 # #First we split the data, we try and splt into 10 seconds intervals
 # cut_winds=[]
 # for i in range(0,Datapoints):
