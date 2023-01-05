@@ -231,3 +231,8 @@ def UDarcy(averages, kinematicV, lengthScale):
 
 print('u* from darcy friction factor = ',UDarcy(p1[1],kinematicV,lengthScale))
 
+
+
+print(p3)
+print(p3[0])
+print(p3[1])

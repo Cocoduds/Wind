@@ -7,9 +7,8 @@ Created on Thu Dec  1 19:43:02 2022
 import numpy as np
 import os
 
-order = [1,2,3,4,5,6] #VERTICLE DETECTORS THEN HIGHEST TO LOWEST
-permutation = [1,4,3,5,0,2] #ORDER = VERTICLE DETECTORS THEN HIGHEST TO LOWEST
-file = 'Ravenscourt3'
+permutation = [4,0,2,3,1] #lowest to highest then verticle
+file = 'day2-1'
 
 Calibration = {
     154 : 0.8447024013209711,
@@ -22,7 +21,7 @@ Calibration = {
 
 
 
-calibration = [Calibration[590],Calibration[261],Calibration[789],Calibration[348],Calibration[154],Calibration[150]]
+calibration = [Calibration[789],Calibration[348],Calibration[590],Calibration[154],1]
 
 
 
@@ -38,13 +37,12 @@ f.close()
 
 
 
-data=np.loadtxt(file+'fixed.csv', delimiter = ',', encoding='utf-8-sig', skiprows= 1, usecols = range(1,13))
+data=np.loadtxt(file+'fixed.csv', delimiter = ',', encoding='utf-8-sig', skiprows= 1, usecols = range(1,11))
 data = np.delete(data,0,1)
 data = np.delete(data,1,1)
 data = np.delete(data,2,1)
 data = np.delete(data,3,1)
 data = np.delete(data,4,1)
-data = np.delete(data,5,1)
 data = data[:, permutation]
 for i in range(len(data[1,:])):
     for j in range(len(data[:,i])):
@@ -57,17 +55,13 @@ for i in range(len(data[1,:])):
 np.savetxt(file+'Data.csv', data, delimiter=',')
 
 
-data=np.loadtxt(file+'fixed.csv', delimiter = ',', encoding='utf-8-sig', skiprows= 1, usecols = range(1,13))
+data=np.loadtxt(file+'fixed.csv', delimiter = ',', encoding='utf-8-sig', skiprows= 1, usecols = range(1,11))
 data = np.delete(data,1,1)
 data = np.delete(data,2,1)
 data = np.delete(data,3,1)
 data = np.delete(data,4,1)
 data = np.delete(data,5,1)
-data = np.delete(data,6,1)
-idx = np.empty_like(permutation)
-idx[permutation] = np.arange(len(permutation))
-data[:, idx]  # return a rearranged copy
-data[:] = data[:, idx]  # in-place modification of a
+data = data[:, permutation]
 
 np.savetxt(file+'Temps.csv', data, delimiter=',')
 
