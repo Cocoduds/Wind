@@ -30,13 +30,13 @@ Datapoints = 5
 heights = np.array([1,2,3,4,5])*0.45
 #%%
 #Loading data and isnerting numpy nans
-data=np.loadtxt("Ravenscourt3Data.csv", delimiter = ',', encoding='utf-8-sig')
+data=np.loadtxt("Ravenscourt2Data.csv", delimiter = ',', encoding='utf-8-sig')
 for i in range(len(data[0,:])):
     for j in range(len(data[:,i])):
         if data[j][i] < 0:
             data[j][i] = np.nan
 
-temps=np.loadtxt("Ravenscourt3Temps.csv", delimiter = ',', encoding='utf-8-sig')
+temps=np.loadtxt("Ravenscourt2Temps.csv", delimiter = ',', encoding='utf-8-sig')
 for i in range(len(data[0,:])):
     for j in range(len(temps[:,i])):
         if temps[j][i] < 0:
@@ -198,7 +198,7 @@ for j in range(0,Datapoints):
 #    for i in range(0,len(data[i,:])):
 #        integral = integal + data[i][j]
 #    print(integral)
-    print(integrate(autocorrsList[j],dx,40))
+    print('integral=',integrate(autocorrsList[j],dx,40))
    
 #%% Plotting fisrt log scale
 fit_3,cov_3 = np.polyfit(np.log(heights),averages,1,cov=True)

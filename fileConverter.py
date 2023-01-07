@@ -7,8 +7,8 @@ Created on Thu Dec  1 19:43:02 2022
 import numpy as np
 import os
 
-permutation = [4,0,2,3,1] #lowest to highest then verticle
-file = 'day2-1'
+permutation = [4,3,1,2,0] #lowest to highest then verticle
+file = 'BigField1'
 
 Calibration = {
     154 : 0.8447024013209711,
@@ -21,7 +21,7 @@ Calibration = {
 
 
 
-calibration = [Calibration[789],Calibration[348],Calibration[590],Calibration[154],1]
+calibration = [Calibration[261],Calibration[348],Calibration[789],Calibration[154],Calibration[590]]
 
 
 
